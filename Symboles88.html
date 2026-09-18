@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symboles88 - ASCII Art Generator</title>
+    <!-- Importing fonts to match the reference aesthetic -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* --- THEME VARIABLES --- */
+        :root {
+            /* Light Theme (Grid Paper) */
+            --bg-color: #f4f4f0;
+            --grid-color: #e0e0e0;
+            --card-bg: #ffffff;
+            --text-main: #222222;
+            --text-sub: #555555;
+            --accent: #f2c94c;
+            --accent-hover: #e0b83e;
+            --border-color: #d1d1d1;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        [data-theme="dark"] {
+            /* Dark Theme (Matte Black & Yellow) */
+            --bg-color: #1a1a1a;
+            --grid-color: #2a2a2a;
+            --card-bg: #252525;
+            --text-main: #f0f0f0;
+            --text-sub: #aaaaaa;
+            --accent: #f2c94c;
+            --accent-hover: #e0b83e;
+            --border-color: #444444;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* --- GLOBAL RESET & BASE STYLES --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            transition: background-color 0.3s, color 0.3s;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            /* Grid background pattern */
+            background-image: 
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 30px 30px;
+            background-position: center top;
+        }
+
+        /* --- HEADER --- */
+        header {
+            text-align: center;
+            padding: 40px 20px 20px;
+            position: relative;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: var(--text-sub);
+            font-style: italic;
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            box-shadow: var(--shadow);
+        }
+
+        .theme-toggle:hover {
+            background: var(--accent);
+            color: #1a1a1a;
+            border-color: var(--accent);
+        }
+
+        /* SVG Icon Alignment inside buttons */
+        .theme-toggle svg, .btn svg {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        /* --- MAIN LAYOUT --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 30px;
+            flex: 1;
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* --- CARD STYLES --- */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: var(--shadow);
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .card h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        /* --- CONTROL PANEL --- */
+        .control-group {
+            margin-bottom: 20px;
+        }
+
+        .control-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-sub);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* File Upload */
+        .file-upload {
+            width: 100%;
+            padding: 15px;
+            border: 2px dashed var(--border-color);
+            border-radius: 10px;
+            background: var(--bg-color);
+            cursor: pointer;
+            text-align: center;
+            transition: border-color 0.2s;
+            font-size: 0.9rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .file-upload:hover {
+            border-color: var(--accent);
+        }
+
+        .file-upload input[type="file"] {
+            display: none;
+        }
+
+        .file-upload span {
+            color: var(--accent);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Character Input */
+        .char-input-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .char-input-wrapper input[type="text"] {
+            width: 80px;
+            height: 60px;
+            font-size: 2rem;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            background: var(--bg-color);
+            color: var(--accent);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            transition: border-color 0.2s;
+        }
+
+        .char-input-wrapper input[type="text"]:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .char-input-wrapper p {
+            font-size: 0.8rem;
+            color: var(--text-sub);
+            line-height: 1.4;
+        }
+
+        /* Range Slider */
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            background: var(--border-color);
+            border-radius: 5px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        /* Styled Select */
+        .styled-select {
+            width: 100%;
+            padding: 12px;
+            background: var(--bg-color);
+            color: var(--text-main);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            cursor: pointer;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .styled-select:focus {
+            border-color: var(--accent);
+        }
+
+        /* Color Pickers Sub-controls */
+        .sub-controls {
+            background: var(--bg-color);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .color-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .color-row label {
+            margin: 0;
+            font-size: 0.85rem;
+            text-transform: none;
+            font-weight: 500;
+        }
+
+        .color-row input[type="color"] {
+            width: 45px;
+            height: 35px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            background: transparent;
+            padding: 2px;
+        }
+
+        /* Checkbox */
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .checkbox-wrapper input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--accent);
+            cursor: pointer;
+        }
+
+        .checkbox-wrapper label {
+            margin: 0;
+            text-transform: none;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn {
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-copy {
+            background: var(--bg-color);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-copy:hover {
+            background: var(--border-color);
+        }
+
+        .btn-download {
+            background: var(--accent);
+            color: #1a1a1a;
+            border: 1px solid var(--accent);
+        }
+
+        .btn-download:hover {
+            background: var(--accent-hover);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Utility */
+        .hidden {
+            display: none !important;
+        }
+
+        /* --- OUTPUT PREVIEW AREA --- */
+        .output-area {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 20px;
+            min-height: 400px;
+            overflow: auto;
+            position: relative;
+        }
+
+        #asciiCanvas {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            display: none;
+        }
+
+        .placeholder-text {
+            color: var(--text-sub);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            text-align: center;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            border-top: 1px solid var(--border-color);
+            background: var(--card-bg);
+            margin-top: auto;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Symboles88</h1>
+        <p>Image to Single Character Mosaic</p>
+        <button class="theme-toggle" id="themeToggle">
+            <span id="themeIcon">
+                <!-- Default Sun Icon (Light Mode) -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+            </span>
+            <span id="themeText">Light Mode</span>
+        </button>
+    </header>
+
+    <main class="container">
+        <!-- LEFT COLUMN: CONTROLS -->
+        <div class="card">
+            <h2>Controls</h2>
+
+            <!-- File Upload -->
+            <div class="control-group">
+                <label for="imageUpload">1. Upload Image</label>
+                <label class="file-upload" for="imageUpload">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                        CHOOSE FILE
+                    </span>
+                    <span id="fileName" style="color: var(--text-sub); font-weight: 400;">No file chosen</span>
+                    <input type="file" id="imageUpload" accept="image/*">
+                </label>
+            </div>
+
+            <!-- Character Input -->
+            <div class="control-group">
+                <label for="charInput">2. Choose Symbol (Max 1)</label>
+                <div class="char-input-wrapper">
+                    <input type="text" id="charInput" value="█" maxlength="1" placeholder="█">
+                    <p>Type a single character.<br>Examples: █, #, @, ●, ✦</p>
+                </div>
+            </div>
+
+            <!-- Resolution -->
+            <div class="control-group">
+                <label for="widthSlider">3. Resolution (Columns: <span id="widthVal">100</span>)</label>
+                <input type="range" id="widthSlider" min="30" max="300" value="100">
+            </div>
+
+            <!-- Color Mode Selector (No Emojis, only text) -->
+            <div class="control-group">
+                <label for="colorMode">4. Color Mode</label>
+                <select id="colorMode" class="styled-select">
+                    <option value="original">Original Image Colors</option>
+                    <option value="monochrome">Custom Monochrome</option>
+                    <option value="gradient">Custom Gradient</option>
+                </select>
+            </div>
+
+            <!-- Custom Monochrome Settings -->
+            <div id="monoControls" class="sub-controls hidden">
+                <div class="color-row">
+                    <label>Symbol Color</label>
+                    <input type="color" id="monoColor" value="#f2c94c">
+                </div>
+                <div class="color-row">
+                    <label>Background Color</label>
+                    <input type="color" id="monoBg" value="#1a1a1a">
+                </div>
+            </div>
+
+            <!-- Custom Gradient Settings -->
+            <div id="gradControls" class="sub-controls hidden">
+                <div class="color-row">
+                    <label>Darkest Color</label>
+                    <input type="color" id="gradDark" value="#000000">
+                </div>
+                <div class="color-row">
+                    <label>Lightest Color</label>
+                    <input type="color" id="gradLight" value="#f2c94c">
+                </div>
+            </div>
+
+            <!-- Invert Brightness -->
+            <div class="control-group" style="margin-top: 15px;">
+                <div class="checkbox-wrapper">
+                    <input type="checkbox" id="invertCheck">
+                    <label for="invertCheck">Invert Brightness (Swap Dark/Light areas)</label>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="btn btn-copy" id="copyBtn" disabled>
+                    <!-- Copy SVG Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    Copy Text
+                </button>
+                <button class="btn btn-download" id="downloadBtn" disabled>
+                    <!-- Download SVG Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    PNG
+                </button>
+            </div>
+            <p style="font-size: 0.75rem; color: var(--text-sub); text-align: center; margin-top: 10px;">* Text copy exports characters only (no colors)</p>
+        </div>
+
+        <!-- RIGHT COLUMN: OUTPUT -->
+        <div class="output-area" id="outputArea">
+            <div class="placeholder-text" id="placeholderText">
+                Awaiting your image...<br>
+                <span style="font-size: 1rem; font-family: 'Inter', sans-serif;">The generated mosaic will appear here.</span>
+            </div>
+            <canvas id="asciiCanvas"></canvas>
+        </div>
+    </main>
+
+    <footer>
+        Copyright : mohamed005cheikh@gmail.com | by MC88
+    </footer>
+
+    <script>
+        // --- SVG ICONS FOR JS USE ---
+        const sunSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
+        
+        const moonSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+        
+        const checkSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+
+        // --- DOM ELEMENTS ---
+        const imageUpload = document.getElementById('imageUpload');
+        const fileName = document.getElementById('fileName');
+        const charInput = document.getElementById('charInput');
+        const widthSlider = document.getElementById('widthSlider');
+        const widthVal = document.getElementById('widthVal');
+        
+        const colorMode = document.getElementById('colorMode');
+        const monoControls = document.getElementById('monoControls');
+        const gradControls = document.getElementById('gradControls');
+        const monoColor = document.getElementById('monoColor');
+        const monoBg = document.getElementById('monoBg');
+        const gradDark = document.getElementById('gradDark');
+        const gradLight = document.getElementById('gradLight');
+        const invertCheck = document.getElementById('invertCheck');
+
+        const downloadBtn = document.getElementById('downloadBtn');
+        const copyBtn = document.getElementById('copyBtn');
+        const canvas = document.getElementById('asciiCanvas');
+        const ctx = canvas.getContext('2d');
+        const placeholderText = document.getElementById('placeholderText');
+        
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+
+        // --- STATE VARIABLES ---
+        let currentImage = null;
+        let currentTheme = 'light';
+        let currentAsciiText = '';
+
+        // --- EVENT LISTENERS ---
+
+        // Theme Toggle
+        themeToggle.addEventListener('click', () => {
+            if (currentTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                currentTheme = 'dark';
+                themeIcon.innerHTML = moonSVG;
+                themeText.textContent = 'Dark Mode';
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+                currentTheme = 'light';
+                themeIcon.innerHTML = sunSVG;
+                themeText.textContent = 'Light Mode';
+            }
+            if (currentImage) generateMosaic();
+        });
+
+        // Image Upload
+        imageUpload.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            fileName.textContent = file.name;
+            
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                const img = new Image();
+                img.onload = () => {
+                    currentImage = img;
+                    placeholderText.style.display = 'none';
+                    canvas.style.display = 'block';
+                    downloadBtn.disabled = false;
+                    copyBtn.disabled = false;
+                    generateMosaic();
+                };
+                img.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+
+        // Color Mode Dropdown Logic
+        colorMode.addEventListener('change', () => {
+            if (colorMode.value === 'original') {
+                monoControls.classList.add('hidden');
+                gradControls.classList.add('hidden');
+            } else if (colorMode.value === 'monochrome') {
+                monoControls.classList.remove('hidden');
+                gradControls.classList.add('hidden');
+            } else if (colorMode.value === 'gradient') {
+                monoControls.classList.add('hidden');
+                gradControls.classList.remove('hidden');
+            }
+            if (currentImage) generateMosaic();
+        });
+
+        // Input Change Listeners
+        charInput.addEventListener('input', () => {
+            if (charInput.value.length > 1) charInput.value = charInput.value.slice(0, 1);
+            if (currentImage) generateMosaic();
+        });
+
+        widthSlider.addEventListener('input', () => {
+            widthVal.textContent = widthSlider.value;
+            if (currentImage) generateMosaic();
+        });
+
+        invertCheck.addEventListener('change', () => {
+            if (currentImage) generateMosaic();
+        });
+
+        // Color Pickers Listeners
+        [monoColor, monoBg, gradDark, gradLight].forEach(el => {
+            el.addEventListener('input', () => {
+                if (currentImage) generateMosaic();
+            });
+        });
+
+        // Download PNG
+        downloadBtn.addEventListener('click', () => {
+            if (!currentImage) return;
+            const link = document.createElement('a');
+            link.download = 'Symboles88_Mosaic.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        });
+
+        // Copy Text
+        copyBtn.addEventListener('click', () => {
+            if (!currentImage || !currentAsciiText) return;
+            navigator.clipboard.writeText(currentAsciiText).then(() => {
+                const originalHTML = copyBtn.innerHTML;
+                copyBtn.innerHTML = `${checkSVG} Copied!`;
+                copyBtn.style.color = 'var(--accent)';
+                copyBtn.style.borderColor = 'var(--accent)';
+                
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalHTML;
+                    copyBtn.style.color = '';
+                    copyBtn.style.borderColor = '';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+                alert('Failed to copy text. Your browser might not support this feature.');
+            });
+        });
+
+        // --- CORE LOGIC: GENERATE MOSAIC ---
+        function generateMosaic() {
+            if (!currentImage) return;
+
+            const cols = parseInt(widthSlider.value);
+            const symbol = charInput.value || '█';
+            const mode = colorMode.value;
+            const invert = invertCheck.checked;
+
+            // Calculate dimensions
+            const ratio = currentImage.height / currentImage.width;
+            const rows = Math.floor(cols * ratio * 0.5);
+
+            // Downscale image to extract pixel data
+            const tempCanvas = document.createElement('canvas');
+            const tempCtx = tempCanvas.getContext('2d');
+            tempCanvas.width = cols;
+            tempCanvas.height = rows;
+            tempCtx.drawImage(currentImage, 0, 0, cols, rows);
+            const imgData = tempCtx.getImageData(0, 0, cols, rows).data;
+
+            // Setup output canvas
+            const fontSize = 12;
+            ctx.font = `${fontSize}px monospace`;
+            const charWidth = fontSize * 0.6; 
+            const charHeight = fontSize * 1.1;
+
+            canvas.width = Math.floor(cols * charWidth);
+            canvas.height = Math.floor(rows * charHeight);
+
+            // Determine Background Color
+            let bgFill = currentTheme === 'light' ? '#ffffff' : '#1a1a1a';
+            if (mode === 'monochrome') {
+                bgFill = monoBg.value;
+            } else if (mode === 'gradient') {
+                bgFill = gradDark.value;
+            }
+            
+            ctx.fillStyle = bgFill;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            currentAsciiText = '';
+
+            // Extract Color Values for looping
+            let sr, sg, sb;
+            if (mode === 'monochrome') {
+                const hex = monoColor.value;
+                sr = parseInt(hex.slice(1, 3), 16);
+                sg = parseInt(hex.slice(3, 5), 16);
+                sb = parseInt(hex.slice(5, 7), 16);
+            }
+
+            let dr, dg, db, lr, lg, lb;
+            if (mode === 'gradient') {
+                const dHex = gradDark.value;
+                const lHex = gradLight.value;
+                dr = parseInt(dHex.slice(1, 3), 16);
+                dg = parseInt(dHex.slice(3, 5), 16);
+                db = parseInt(dHex.slice(5, 7), 16);
+                lr = parseInt(lHex.slice(1, 3), 16);
+                lg = parseInt(lHex.slice(3, 5), 16);
+                lb = parseInt(lHex.slice(5, 7), 16);
+            }
+
+            // Loop through pixels
+            for (let y = 0; y < rows; y++) {
+                for (let x = 0; x < cols; x++) {
+                    const i = (y * cols + x) * 4;
+                    let r = imgData[i];
+                    let g = imgData[i + 1];
+                    let b = imgData[i + 2];
+                    let a = imgData[i + 3];
+
+                    if (a === 0) {
+                        currentAsciiText += ' ';
+                        continue;
+                    }
+
+                    let brightness = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+                    if (invert) brightness = 1 - brightness;
+
+                    currentAsciiText += symbol;
+
+                    // Determine Fill Style based on Mode
+                    if (mode === 'original') {
+                        ctx.fillStyle = `rgb(${r},${g},${b})`;
+                    } else if (mode === 'monochrome') {
+                        let alpha = currentTheme === 'light' ? (1 - brightness) : brightness;
+                        alpha = Math.max(0, Math.min(1, alpha));
+                        ctx.fillStyle = `rgba(${sr},${sg},${sb},${alpha})`;
+                    } else if (mode === 'gradient') {
+                        const rOut = Math.round(dr + (lr - dr) * brightness);
+                        const gOut = Math.round(dg + (lg - dg) * brightness);
+                        const bOut = Math.round(db + (lb - db) * brightness);
+                        ctx.fillStyle = `rgb(${rOut},${gOut},${bOut})`;
+                    }
+
+                    // Draw character
+                    const posX = (x * charWidth) + (charWidth / 2);
+                    const posY = (y * charHeight) + (charHeight / 2);
+                    ctx.fillText(symbol, posX, posY);
+                }
+                currentAsciiText += '\n';
+            }
+        }
+    </script>
+</body>
+</html>
