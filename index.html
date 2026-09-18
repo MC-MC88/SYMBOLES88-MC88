@@ -419,7 +419,7 @@
         /* --- FOOTER --- */
         footer {
             text-align: center;
-            padding: 20px;
+            padding: 30px 20px;
             font-size: 0.85rem;
             color: var(--text-sub);
             border-top: 1px solid var(--border-color);
@@ -431,6 +431,53 @@
             color: var(--accent);
             text-decoration: none;
             font-weight: 600;
+        }
+
+        /* --- NOTICE BOX --- */
+        .site-notice {
+            max-width: 760px;
+            margin: 0 auto 22px;
+            padding: 18px 22px;
+            text-align: left;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .notice-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            margin-bottom: 12px;
+        }
+
+        .notice-title svg {
+            width: 18px;
+            height: 18px;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .site-notice p {
+            line-height: 1.75;
+            margin-bottom: 12px;
+        }
+
+        .site-notice p:last-child {
+            margin-bottom: 0;
+        }
+
+        .site-notice strong {
+            color: var(--accent);
+        }
+
+        @media (max-width: 600px) {
+            .site-notice { text-align: left; padding: 16px; }
         }
     </style>
 </head>
@@ -550,7 +597,28 @@
     </main>
 
     <footer>
-        Copyright : mohamed005cheikh@gmail.com | by MC88
+        <!-- NOTICE -->
+        <div class="site-notice" role="note" aria-label="Friendly notice">
+            <p class="notice-title">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                A friendly note
+            </p>
+
+            <p>
+                <strong>Welcome to Symboles88!</strong> Please feel free to download the PNG images — they are all yours.
+                The <strong>Copy</strong> feature isn't working yet and will be fixed very soon, Insha'Allah.
+                That sentence is simply a spontaneous, good-natured way of saying “I'm on it” — it is
+                <strong>not a formal promise, not a complaint, and not meant in any harsh or aggressive way</strong>.
+                Thank you for your patience and understanding.
+            </p>
+        </div>
+
+        <!-- COPYRIGHT -->
+        <p>Copyright : mohamed005cheikh@gmail.com | by MC88</p>
     </footer>
 
     <script>
