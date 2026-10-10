@@ -1,153 +1,210 @@
+<h2 id="français">🇫🇷 Version française</h2>
+
 <div align="center">
 
-# 🎨 SYMBOLES88
+# 🎯 Symboles88 — MC88
 
-**Turn any image into a mosaic built from one single character.**
+**Une image transformée en mosaïque de caractères.**
 
 </div>
 
+🌍 **Langues :** [Français](#français) · [English](#english)
+
 ---
+
+> **En bref** — Symboles88 convertit une image en mosaïque de texte en utilisant un seul caractère répété.
+> 
+> **Choix du caractère · Trois modes de couleur · Export PNG**
+
+<!-- 
+## 📸 Aperçu
+
+<div align="center">
+  <img src="https://github.com/MC-MC88/[REPO]/raw/main/images/Sc1.png" alt="[Description]" width="100%" />
+</div>
+
+---
+
+🔗 **Démo en ligne :** [https://MC-MC88.github.io/[REPO]/](https://MC-MC88.github.io/[REPO]/)
+📦 **Code source :** [https://github.com/MC-MC88/[REPO]](https://github.com/MC-MC88/[REPO]/)
+-->
+
+## 👋 Bienvenue
+
+Symboles88 est un fichier HTML unique. Vous importez une image, vous choisissez un caractère, puis l'outil dessine l'image avec ce caractère seul, sur un canevas. Tout se passe dans le navigateur. Vous pouvez exporter le résultat en PNG.
+
+---
+
+## ✨ Ce que vous trouverez
+
+**Import d'image.**  
+Vous choisissez n'importe quel fichier image. Le nom du fichier s'affiche sous le bouton.
+
+**Choix du caractère.**  
+Vous entrez un seul caractère. La valeur par défaut est █. Vous pouvez utiliser #, @, ●, ✦ ou tout autre caractère unique.
+
+**Contrôle de la résolution.**  
+Un curseur règle le nombre de colonnes, de 30 à 300. Plus le nombre est élevé, plus la mosaïque est détaillée.
+
+**Trois modes de couleur.**  
+Couleurs d'origine de l'image, monochrome personnalisé (couleur et fond), ou dégradé personnalisé (couleur sombre et couleur claire).
+
+**Inversion de luminosité.**  
+Une case à cocher échange les zones sombres et les zones claires.
+
+**Export.**  
+Un bouton télécharge le résultat en PNG. Un bouton copie le texte brut du caractère utilisé.
+
+**Thème clair ou sombre.**  
+Un bouton bascule entre les deux. Le thème clair utilise un fond papier quadrillé, le thème sombre un fond noir mat.
+
+---
+
+## 🧭 Comment ça marche
+
+**1. Importez une image.**  
+Choisissez un fichier depuis votre appareil.
+
+**2. Choisissez un caractère et une résolution.**  
+Le curseur règle le nombre de colonnes.
+
+**3. Choisissez un mode de couleur.**  
+Couleurs d'origine, monochrome, ou dégradé. Vous pouvez inverser la luminosité.
+
+**4. Exportez le résultat.**  
+Téléchargez le PNG, ou copiez le texte brut.
+
+C'est tout. L'image ne quitte pas votre appareil.
+
+---
+
+## 🛠️ Petits coups de main
+
+**Mon image est-elle envoyée quelque part ?**  
+Non. Tout le traitement se fait dans votre navigateur, en local.
+
+**Le bouton « Copy Text » fonctionne-t-il ?**  
+Le bouton existe et tente la copie. Un message sur la page indique qu'il est encore en cours de correction. En attendant, le bouton « PNG » fonctionne.
+
+**Quels formats d'image sont acceptés ?**  
+Tous les formats que votre navigateur peut afficher : JPG, PNG, GIF, WebP, BMP.
+
+**Puis-je utiliser l'outil hors ligne ?**  
+Oui, une fois la page chargée. Aucun serveur n'est appelé.
+
+---
+
+<br /><br /><br />
+
+<h2 id="english">🇬🇧 English version</h2>
+
+<div align="center">
+
+# 🎯 Symboles88 — MC88
+
+**An image turned into a character mosaic.**
+
+</div>
+
+🌍 **Languages:** [Français](#français) · [English](#english)
+
+---
+
+> **In short** — Symboles88 converts an image into a text mosaic using a single repeated character.
+> 
+> **Character choice · Three color modes · PNG export**
+
+<!-- 
+## 📸 Preview
+
+<div align="center">
+  <img src="https://github.com/MC-MC88/[REPO]/raw/main/images/Sc1.png" alt="[Description]" width="100%" />
+</div>
+
+---
+
+🔗 **Live demo:** [https://MC-MC88.github.io/[REPO]/](https://MC-MC88.github.io/[REPO]/)
+📦 **Source code:** [https://github.com/MC-MC88/[REPO]](https://github.com/MC-MC88/[REPO]/)
+-->
 
 ## 👋 Welcome
 
-Most ASCII art tools hand you a fixed alphabet: a ramp of characters from darkest to lightest — `@%#*+=-:.` — and tell you to accept it. That works for some things. But it also means every image ends up looking like it was drawn by the same hand, in the same voice, with the same limited set of marks.
-
-Symboles88 does the opposite. You give it one character. Just one — a block, a hash, a dot, a star, a heart, whatever you can type — and the entire image gets rebuilt from that single mark, repeated thousands of times. Every pixel becomes the same symbol. What changes is the color behind it and how dense it feels. The result isn't classic ASCII art. It's closer to a mosaic: the picture, seen through a character you chose.
-
-Why does this matter? Because now the output is yours. Type `█` and you get a heavy, poster-like image. Type `.` and the whole thing turns into something light and quiet. Type `✦` and it becomes something closer to starlight. Same photo, different soul.
-
-Open it, upload an image, and watch it happen in real time.
-
----
-
-## 📸 Look Inside
-
-<br />
-
-<div align="center">
-  <img src="https://github.com/mohamed005cheikh-rgb/SYMBOLES88-MC88/raw/main/images/preview-1.png" alt="The Symboles88 interface" width="100%" />
-  <br />
-  <sub><b>① The interface</b></sub>
-</div>
-
-<br />
-<br />
-
-<div align="center">
-  <img src="https://github.com/mohamed005cheikh-rgb/SYMBOLES88-MC88/raw/main/images/preview-2.png" alt="Working with a photo" width="100%" />
-  <br />
-  <sub><b>② Working with a photo</b></sub>
-</div>
-
-<br />
-<br />
-
-<div align="center">
-  <img src="https://github.com/mohamed005cheikh-rgb/SYMBOLES88-MC88/raw/main/images/preview-3.png" alt="The finished mosaic" width="100%" />
-  <br />
-  <sub><b>③ The finished mosaic</b></sub>
-</div>
+Symboles88 is a single HTML file. You import an image, you choose a character, then the tool draws the image with that one character on a canvas. Everything runs in the browser. You can export the result as PNG.
 
 ---
 
 ## ✨ What you'll find
 
-**Any character you can type becomes the brush.**  
-Default is `█`, but the input accepts anything — a digit, a letter, a symbol, a Unicode shape like `●` or `◆` or `+`. Type something new and the whole image redraws instantly. There's no library of "approved" characters. If you can type it, you can use it.
+**Image import.**  
+You pick any image file. The file name appears below the button.
 
-**Three color modes, three completely different looks.**  
-*Original Image Colors* keeps the photograph's real palette — every symbol carries the exact hue of the pixel beneath it. *Custom Monochrome* throws the colors away and paints every character in one tone you choose, with brightness controlling how strongly it shows against the background. *Custom Gradient* maps the image's brightness between two colors you pick — a dark end and a light end — and produces something closer to a duotone poster. Same image, three moods.
+**Character choice.**  
+You enter a single character. The default is █. You can use #, @, ●, ✦ or any other single character.
 
-**Full control over the palette, in every mode.**  
-Both custom modes expose real color pickers — symbol color and background for monochrome, darkest and lightest for gradient. Change them and the image re-renders on the spot. You can build a warm one, a cold one, a high-contrast one, and compare all three side by side in seconds.
+**Resolution control.**  
+A slider sets the number of columns, from 30 to 300. A higher number gives a more detailed mosaic.
 
-**Resolution you actually control.**  
-The slider goes from 30 columns up to 300. At 30 the mosaic is bold and abstract — you see the shape of the image, not its details. At 300 it's fine-grained and detailed, and the symbol almost disappears into the picture. The right number depends on what you're making and how big the final piece will be.
+**Three color modes.**  
+Original image colors, custom monochrome (color and background), or custom gradient (dark color and light color).
 
-**Invert the brightness in one click.**  
-Some images just look better flipped — dark areas becoming light, light becoming dark. One checkbox. That's the whole feature, and it changes everything.
+**Brightness inversion.**  
+A checkbox swaps the dark and light areas.
 
-**Copy the text, or download the image.**  
-The *Copy Text* button puts the raw character grid on your clipboard — useful for pasting into a text editor, a code file, a comment, or anywhere a monospace font lives. The *Download PNG* button exports the rendered result as an image you can post, print, or send. Two different outputs for two different uses, both one click away.
+**Export.**  
+One button downloads the result as PNG. Another copies the raw text of the used character.
 
-**Light and dark mode, built into the design.**  
-The whole interface swaps between a grid-paper look and a matte black one. The mosaic itself updates with it — the default background flips so the image stays readable either way.
+**Light or dark theme.**  
+A button toggles between the two. The light theme uses a grid-paper background, the dark theme a matte black background.
 
 ---
 
 ## 🧭 How it works
 
-**1. Open it.**  
-One HTML file. No install, no build step, no server. Double-click it and it runs.
+**1. Upload an image.**  
+Choose a file from your device.
 
-**2. Upload an image.**  
-Anything your browser can display — a photo, a screenshot, a logo, a drawing. It never leaves your device.
+**2. Choose a character and a resolution.**  
+The slider sets the number of columns.
 
-**3. Pick your character.**  
-Type a single symbol into the box. The default `█` gives a solid, poster-like feel. Try a few others to see how the mood changes.
+**3. Choose a color mode.**  
+Original colors, monochrome or gradient. You can invert the brightness.
 
-**4. Set the resolution.**  
-Drag the slider. Lower numbers give a chunky, abstract mosaic. Higher numbers give something closer to a real image.
+**4. Export the result.**  
+Download the PNG, or copy the raw text.
 
-**5. Choose a color mode.**  
-Original keeps the image's palette. Monochrome and Gradient let you pick the colors yourself.
-
-**6. Tweak until it feels right.**  
-Invert brightness if the image reads better flipped. Adjust the color pickers until the mood matches what you're after.
-
-**7. Export.**  
-Copy the text, or download the PNG. That's it.
+That's it. The image does not leave your device.
 
 ---
 
-## 🛠️ A few small helps
+## 🛠️ A little help
 
-**"The characters look stretched."**  
-That's normal — a character grid isn't square. Symboles88 compensates for the aspect ratio automatically (each cell is roughly twice as tall as it is wide, so the final image keeps the original proportions). If your source image looks off, it's usually because it's very wide or very tall to begin with. Crop it first for the cleanest result.
+**Is my image sent anywhere?**  
+No. All processing runs in your browser, locally.
 
-**"The image is very small / very large."**  
-Move the resolution slider. There's no fixed "correct" size — 30 columns is right for a poster, 300 is right for detail. The PNG export keeps the same grid, so a low number gives a small file and a high number gives a bigger one.
+**Does the "Copy Text" button work?**  
+The button exists and tries to copy. A notice on the page says it is still being fixed. In the meantime, the "PNG" button works.
 
-**"Copy Text gives me plain characters, not the colors."**  
-That's by design. Text output is meant to be pasted somewhere that doesn't understand color — a `.txt` file, a terminal, a code comment. If you want the colors, use *Download PNG* instead. It captures the full rendered mosaic.
+**What image formats are accepted?**  
+Any format your browser can display: JPG, PNG, GIF, WebP, BMP.
 
-**"The colors don't match my picker exactly."**  
-In *Monochrome* mode the color is applied with varying transparency, so a bright pixel shows the color at full strength while a dark pixel shows it faintly. That's what gives the image depth. If you want the color to appear uniformly, use *Gradient* mode instead — it blends two solid colors across the brightness range.
-
-**"Can I use a very large image?"**  
-Yes, but consider resizing it first. The browser downscales it internally to match the chosen resolution, so a 4000×3000 photo isn't necessary — a 1200×900 version will produce the exact same mosaic and render faster.
-
-**"Does anything get uploaded?"**  
-No. The entire process — reading the file, decoding it, rendering the mosaic, exporting the result — happens inside your browser. Your images never touch a server. You can turn off your internet and it still works.
-
-**"Which character should I use?"**  
-That depends on the image. Solid blocks (`█`, `▓`, `●`, `◆`) work well for strong, poster-like results. Punctuation (`.`, `,`, `·`, `+`) gives a lighter, more delicate look. Emoji can work but often render unevenly across systems — stick to typographic symbols if you want predictable output.
+**Can I use the tool offline?**  
+Yes, once the page is loaded. No server is called.
 
 ---
 
 <div align="center">
 
-### 📞 A question, an idea, a bug?
+### 📞 Une question, une idée ? / A question, an idea?
 
 [![Email](https://img.shields.io/badge/Email-mohamed005cheikh@gmail.com-d14836?style=flat-square&logo=gmail&logoColor=white)](mailto:mohamed005cheikh@gmail.com)
-[![WhatsApp](https://img.shields.io/badge/WhatsApp-+222_30_73_64_75-25D366?style=flat-square&logo=whatsapp&logoColor=white)](https://wa.me/22230736475)
-[![GitHub](https://img.shields.io/badge/GitHub-mohamed005cheikh--rgb-181717?style=flat-square&logo=github)](https://github.com/mohamed005cheikh-rgb)
+[![WhatsApp](https://img.shields.io/badge/WhatsApp-+222_30_72_64_75-25D366?style=flat-square&logo=whatsapp&logoColor=white)](https://wa.me/22230726475)
+[![GitHub](https://img.shields.io/badge/GitHub-MC--MC88-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/MC-MC88)
+[![Portfolio](https://img.shields.io/badge/Portfolio-MC88-000?style=flat-square&logo=github&logoColor=white)](https://MC-MC88.github.io/MC88/)
 
 <br />
 
-*Pick a symbol. Watch it become the image.*
+*Image en symboles / Image into symbols*
 
-<sub>© 2026 Mohamed Cheikh — MC88</sub>
-
-<br />
-<br />
-
-    ███    ███    ████████    ████████    ████████
-    ████  ████   ███    ███  ███    ███  ███    ███
-    ██ ████ ██   ███         ███    ███  ███    ███
-    ██  ██  ██   ███          ████████    ████████
-    ██      ██   ███         ███    ███  ███    ███
-    ██      ██   ███    ███  ███    ███  ███    ███
-    ██      ██    ████████    ████████    ████████
+<sub>MIT License · © 2026 Mohamed Cheikh — MC88</sub>
 
 </div>
